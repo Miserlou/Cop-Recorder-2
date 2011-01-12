@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">aBTC</string>
+    <string name="hello2"> </string>
+    <string name="app_name">aBTC</string>
+    
+     <string name="tobegin"> Per iniziare, utilizzare il browser, o aprire il menu e premere Apri per selezionare un file torrent! </string>
+     <string name="message"> \n Se il download non inizia quando si fa clic sul torrente, fare clic su lunghe per salvarlo, quindi selezionare dal menu Download. \n\n Inoltre, si deve essere su una connessione WiFi o 3G, e il torrente dovrebbe avere molti semi. Un bug di Android cause di tanto in tanto un crash in silenzio, ridurre il numero di coetanei per impedire questo. Ci è stato segnalato e spero che ciò sarà fissato in Donut. Please be patient! \n\n Email me se avete qualche bug da segnalare. Attualmente aBTC supporta un solo download alla volta a causa delle limitate risorse del telefono cellulare, ma vorrei aggiungere un opzione se molte persone lo chiederanno bene per questo. \n\n Grazie per aver utilizzato aBTC e scaricare felice! </string>
+     <string name="working"> Di lavoro .. </string>
+     <string name="download_complete"> Download complete! </string>
+     <string name="pressquit"> Premere Menu -> Esci per interrompere seeding. </string>
+     <string name="up"> "KB / s \t\t Up: " </string>
+     <string name="down"> "Down: " </string>
+     <string name="activepeers"> "Peers attiva: " </string>
+     <string name="data"> "\t\t Data: " </string>
+     <string name="open"> Open </string>
+     <string name="settings"> Impostazioni </string>
+     <string name="quit"> Quit </string>
+     <string name="torrentdownloading"> Torrent download </string>
+     <string name="percentcomplete">% del download completo. </string>
+ 
+    <string name="about_translators">translator-credits</string>
+	
+    <string name="about_comments">OI File Manager is an open file manager that seamlessly cooperates with other applications.</string>  
+	<string name="about_website_label">OI File Manager at OpenIntents</string> 
+	
+	<string name="menu_new_folder">New Folder</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_rename">Rename</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_open">Open</string>
+    <string name="menu_move">Move</string>
+    <string name="menu_copy">Copy</string>
+    
+    <string name="create_new_folder">Create new folder</string>
+    <string name="folder_name">Folder name</string>
+    <string name="file_name">Folder name</string>
+    <string name="this_folder_is_empty">This folder is empty.</string>
+    <string name="really_delete">Do you really want to delete %s?</string>
+    <string name="file_deleted">File deleted.</string>
+    <string name="folder_deleted">Folder deleted.</string>
+    <string name="file_renamed">File renamed.</string>
+    <string name="folder_renamed">Folder renamed.</string>
+    <string name="file_moved">File moved.</string>
+    <string name="folder_moved">Folder moved.</string>
+    <string name="file_copied">File copied.</string>
+    <string name="move_title">Select folder to move to</string>
+    <string name="move_button">Move here</string>
+    <string name="copy_title">Select folder to copy to</string>
+    <string name="copy_button">Copy here</string>
+    
+    <string name="copied_file_name">Copy of %s</string>
+    
+    <string name="error_creating_new_folder">Could not create new folder.</string>
+    <string name="error_deleting_file">Could not delete file.</string>
+    <string name="error_folder_not_empty">Folder is not empty.</string>
+    <string name="error_renaming_file">Could not rename file.</string>
+    <string name="error_renaming_folder">Could not rename folder.</string>
+    <string name="error_moving_file">Could not move file.</string>
+    <string name="error_moving_folder">Could not move folder.</string>
+    <string name="error_copying_file">Could not copy file.</string>
+    <string name="error_file_does_not_exists">File does not exist.</string>
+    
+    <string name="send_not_available">No application available for sending.</string>
+    
+    <string name="application_not_available">Application not available</string>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI File Manager EULA</string>
+	<string name="eula_accept">Accept</string>
+	<string name="eula_refuse">Cancel</string>
+	
+	<!-- Update -->
+	<string name="update_box_text">Please check manually for updates or install OI Update
+for automatic notifications.
+Current version: %s
+	</string>
+	<string name="update_check_now">Check now.</string>
+	<string name="update_get_updater">Get OI Updater.</string>
+	<string name="update_error">Download application not available.</string>
+	<string name="update">Check updates</string>
+	
+    <!-- About -->
+    <string name="about">About</string>
+	<string name="aboutapp_not_available">Version %s\n\nNo compatible extension available to display full info (contact, credits, license).</string>
+    <string name="aboutapp_get">Get OI About</string>
+    
+</resources>
