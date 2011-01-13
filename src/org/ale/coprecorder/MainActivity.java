@@ -51,8 +51,6 @@ public class MainActivity extends Activity {
     public boolean recording = false;
     final Handler mHandler = new Handler();
     private boolean m_servicedBind = false;
-    private VideoRecorder vr;
-    private RecorderActivity ra;
     private MainActivityGroup mag;
     private LinearLayout root;
     
@@ -66,60 +64,17 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
         
-        vr = (VideoRecorder) findViewById(R.id.camcorder_preview);
         c = this;
         
     }
     
-    public void activateButton() {
-        final Button ib = (Button) findViewById(R.id.ib);
-        ib.setClickable(true);
-        ib.setBackgroundResource(R.drawable.button);
-        recording = false;
-    }
-    
     public void onResume() {
         super.onResume();
-        final Button ib = (Button) findViewById(R.id.ib);
         root = (LinearLayout) findViewById(R.id.root);
         final Context c = this;
 
         final MainActivity ma = this;
         
-        ib.setOnTouchListener(new OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                
-                if(event.getAction() != MotionEvent.ACTION_DOWN) {
-                    return false;
-                }
-                
-                if(ra.hidden) {
-                    return false;
-                }
-                
-                    if(recording){
-                    return true;
-                }
-                   
-                    else {
-                        mHandler.postDelayed(new Runnable() {
-
-                            public void run() {
-                                recording = true;
-                                ib.setClickable(false);
-                                ra.start();
-                            }}, 400);
-
-                        ib.setBackgroundResource(R.drawable.buttonpressed);
-                        return true;
-                        }
-            }
-        });
-        
-       if(recording) {
-           ib.setBackgroundResource(R.drawable.buttonpressed);
-       }
        
        final Button b = (Button) findViewById(R.id.aib);
        
@@ -214,11 +169,6 @@ public class MainActivity extends Activity {
        
    }
    
-
-    public void setRecorderActivity(RecorderActivity raa) {
-        ra = raa;
-    }
-
     public void setParentGroup(MainActivityGroup magg) {
         mag = magg;
         System.out.println("Parent group set!");

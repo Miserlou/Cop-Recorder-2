@@ -38,10 +38,8 @@ public class MainActivityGroup extends ActivityGroup {
     final Handler mHandler = new Handler();
     private boolean r_servicedBind = false;
     private boolean u_servicedBind = false;
-    private VideoRecorder vr;
     private String code = "BBB";
     private String codeLeft = "BBB";
-    RecorderActivity raActivity;
     MainActivity maActivity;
     private int vol;
     recordService r_service;
@@ -69,91 +67,6 @@ public class MainActivityGroup extends ActivityGroup {
             }
     };
 
-    
-
-    
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        
-        if(raActivity.hidden) {
-        
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                if("B".equals(codeLeft.substring(0, 1))) {
-                    codeLeft = codeLeft.substring(1, codeLeft.length());
-                }
-                else {
-                    codeLeft = code;
-                }
-            }
-            if (keyCode == KeyEvent.KEYCODE_MENU) {
-                if("M".equals(codeLeft.substring(0, 1))) {
-                    codeLeft = codeLeft.substring(1, codeLeft.length());
-                }
-                else {
-                    codeLeft = code;
-                }
-            }
-            if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-                if("U".equals(codeLeft.substring(0, 1))) {
-                    codeLeft = codeLeft.substring(1, codeLeft.length());
-                }
-                else {
-                    codeLeft = code;
-                }
-            }
-            if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-                if("D".equals(codeLeft.substring(0, 1))) {
-                    codeLeft = codeLeft.substring(1, codeLeft.length());
-                }
-                else {
-                    codeLeft = code;
-                }
-            }
-            
-            if(codeLeft.length() == 0) {
-                raActivity.stop();
-                maActivity.activateButton();
-                codeLeft = code;
-                
-                
-                // UPLOAD STUFF
-                // UPLOAD STUFF
-                // UPLOAD STUFF
-                // UPLOAD STUFF
-                // UPLOAD STUFF
-                
-                AlertDialog.Builder alert2 = new AlertDialog.Builder(this);
-
-                alert2.setTitle(getString(R.string.recording_saved));
-                alert2.setMessage(getString(R.string.upload_recording_now));
-                final Context c = this;
-                alert2.setPositiveButton(getString(R.string.yes_upload), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                        mHandler.post(new Runnable() {
-
-                            public void run() {
-                                Intent mainIntent = new Intent(c, DescribeActivity.class); 
-                                startActivity(mainIntent);
-//                                    u_service.start();
-                            }});
-
-                        finish();
-                }});
-                alert2.setNegativeButton(getString(R.string.no_quit), new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int whichButton) {
-                      finish();
-                  }
-                });
-                alert2.show();
-                
-            }
-            return true;
-        }
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
-            }
-        return false;
-    }
     
     private void bindRecordService(){
         r_servicedBind = bindService(new Intent(this, rService.class), 
@@ -216,23 +129,6 @@ public class MainActivityGroup extends ActivityGroup {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.group);
         
-        Intent i = new Intent(this, RecorderActivity.class);
-        // Ensure that only one ListenActivity can be launched. Otherwise, we may
-        // get overlapping media players.
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Window w =
-          getLocalActivityManager().startActivity(RecorderActivity.class.getName(),
-              i);
-        View v = w.getDecorView();
-        ((ViewGroup) findViewById(R.id.Recorder)).addView(v,
-            new ViewGroup.LayoutParams(LayoutParams.FILL_PARENT,
-                LayoutParams.FILL_PARENT));
-
-        // A little hacky, but otherwise we get an annoying black line where the
-        // seam of the drawer's edge is.
-        ((FrameLayout)((ViewGroup) v).getChildAt(0)).setForeground(null);
-        
-    
         Intent j = new Intent(this, MainActivity.class);
         // Ensure that only one ListenActivity can be launched. Otherwise, we may
         // get overlapping media players.
@@ -244,14 +140,9 @@ public class MainActivityGroup extends ActivityGroup {
             new ViewGroup.LayoutParams(LayoutParams.FILL_PARENT,
                 LayoutParams.FILL_PARENT));
         
-        raActivity = (RecorderActivity) getLocalActivityManager().getActivity(RecorderActivity.class.getName());
         maActivity = (MainActivity) getLocalActivityManager().getActivity(MainActivity.class.getName());
         
-        maActivity.setRecorderActivity(raActivity);
-        raActivity.setMainActivity(maActivity);
-        raActivity.setParentGroup(this);
         maActivity.setParentGroup(this);
-        raActivity.setFL(maActivity.getFL());
         
         AudioManager mgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         vol = mgr.getStreamVolume(AudioManager.STREAM_SYSTEM);
@@ -263,7 +154,7 @@ public class MainActivityGroup extends ActivityGroup {
         String first = prefs.getString("first_time", "fuck");
         if(first.contains("fuck")){
             new AlertDialog.Builder(this)
-            .setMessage("Welcome to OpenWatch! \n\n This application allows opportunistic citizen journalists to invisibly record public and private officials and post the recordings to a central website, openwatch.net. A guide to using the application is availble in the Tutorial in the menu. More information about the OpenWatch can be found in the About section.")
+            .setMessage("Welcome to Cop Recorder 2! \n\n This application allows opportunistic citizen journalists to invisibly record public and private officials and post the recordings to a central website, OpenWatch.net.\n\n A guide to using the application is availble in the Tutorial in the menu. \n\n If you want a version that can record video, please search on the market for OpenWatch. \n\nMore information about the OpenWatch Project can be found in the About section.\n\n Record bravely!")
             .setPositiveButton("Okay!", null)
             .show();
             editor2 = prefs.edit();
