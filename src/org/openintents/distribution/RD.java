@@ -1,6 +1,6 @@
 package org.openintents.distribution;
 
-import org.ale.coprecorder.R;
+import org.ale.coprecord.R;
 
 
 /**

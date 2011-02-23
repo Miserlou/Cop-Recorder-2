@@ -1,4 +1,4 @@
-package org.ale.coprecorder;
+package org.ale.coprecord;
 
 import java.util.Timer;
 import java.util.TimerTask;

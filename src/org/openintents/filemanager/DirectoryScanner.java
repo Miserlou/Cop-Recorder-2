@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.ale.coprecorder.R;
+import org.ale.coprecord.R;
 import org.openintents.filemanager.util.MimeTypes;
 
 import android.content.Context;

@@ -1,4 +1,4 @@
-package org.ale.coprecorder;
+package org.ale.coprecord;
 
 import java.io.File;
 import java.io.FileOutputStream;

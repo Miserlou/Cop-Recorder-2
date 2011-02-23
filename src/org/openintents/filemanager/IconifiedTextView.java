@@ -21,7 +21,7 @@ package org.openintents.filemanager;
  * Dec 7, 2008: Peli: Use inflated layout.
  */
 
-import org.ale.coprecorder.R;
+import org.ale.coprecord.R;
 
 import android.content.Context; 
 import android.graphics.drawable.Drawable; 

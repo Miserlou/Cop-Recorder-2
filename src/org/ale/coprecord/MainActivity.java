@@ -1,4 +1,4 @@
-package org.ale.coprecorder;
+package org.ale.coprecord;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.ale.coprecorder.R;
+import org.ale.coprecord.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -99,7 +99,7 @@ public class MainActivity extends Activity {
                                Toast.makeText(c, "Recording stopped!", Toast.LENGTH_SHORT).show();
                                stopService(new Intent(c, rService.class));
                                mag.r_service = null;
-                               b.setVisibility(4);
+                               b.setVisibility(4); //hide button
                                AlertDialog.Builder alert2 = new AlertDialog.Builder(c);
 
                                alert2.setTitle(getString(R.string.recording_saved));

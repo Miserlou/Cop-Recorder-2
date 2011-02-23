@@ -1,7 +1,9 @@
-package org.ale.coprecorder;
+package org.ale.coprecord;
 
-import org.ale.coprecorder.rService;
-import org.ale.coprecorder.recordService;
+import org.ale.coprecord.rService;
+import org.ale.coprecord.R;
+import org.ale.coprecord.recordService;
+import org.ale.coprecord.uploadService;
 import org.openintents.filemanager.FileManagerActivity;
 
 import android.app.ActivityGroup;
@@ -165,7 +167,11 @@ public class MainActivityGroup extends ActivityGroup {
         code = prefs.getString("code", "BBB");
         codeLeft = code;
         
-        startService(new Intent(this, rService.class));
+        Intent intent = new Intent(rService.ACTION_FOREGROUND);
+        intent.setClass(MainActivityGroup.this, rService.class);
+        startService(intent);
+
+//        startService(new Intent(this, rService.class));
         bindRecordService();
        
     }

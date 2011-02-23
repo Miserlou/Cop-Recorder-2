@@ -1,6 +1,8 @@
-package org.ale.coprecorder;
+package org.ale.coprecord;
 
-import org.ale.coprecorder.MyLocation.LocationResult;
+import org.ale.coprecord.MyLocation.LocationResult;
+import org.ale.coprecord.R;
+import org.ale.coprecord.uploadService;
 
 import android.app.Activity;
 import android.content.ComponentName;

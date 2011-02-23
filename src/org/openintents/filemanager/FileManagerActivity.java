@@ -31,8 +31,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.ale.coprecorder.DescribeActivity;
-import org.ale.coprecorder.R;
+import org.ale.coprecord.DescribeActivity;
+import org.ale.coprecord.R;
 import org.openintents.distribution.AboutDialog;
 import org.openintents.distribution.EulaActivity;
 import org.openintents.distribution.UpdateMenu;

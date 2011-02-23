@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.ale.coprecorder.R;
+import org.ale.coprecord.R;
 import org.openintents.filemanager.util.MimeTypeParser;
 import org.openintents.filemanager.util.MimeTypes;
 import org.xmlpull.v1.XmlPullParserException;
