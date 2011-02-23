@@ -114,6 +114,11 @@ public class rService extends Service{
     }
 
     void handleCommand(Intent intent) {
+        
+        if(intent == null) {
+            return;
+        }
+        
         if (ACTION_FOREGROUND.equals(intent.getAction())) {
             // In this sample, we'll use the same text for the ticker and the expanded notification
             CharSequence text = foreground_service_started;
