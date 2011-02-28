@@ -171,7 +171,6 @@ public class MainActivityGroup extends ActivityGroup {
         intent.setClass(MainActivityGroup.this, rService.class);
         startService(intent);
 
-//        startService(new Intent(this, rService.class));
         bindRecordService();
        
     }
@@ -194,59 +193,14 @@ public class MainActivityGroup extends ActivityGroup {
     }
     
     public void share_it(){
-        //System.out.println("Sharing!");
-        
         final String title = "OpenWatch - A Participatory Countersurveillence Project";
-        final String body = "I just became part of OpenWatch.net, a participatory countersurveillence project!";
+        final String body = "I just became part of OpenWatch.net, a participatory countersurveillence project! #openwatch http://bit.ly/hhkWWc";
         
         final Intent i = new Intent(Intent.ACTION_SEND);
-        
-        final CharSequence[] items = {"Email", "Messaging", "Facebook", "Twitter", "Other"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Share how?");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                switch(item){
-                    case 0:
-                        i.setType("plain/text");
-                        i.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{""});
-                        i.putExtra(Intent.EXTRA_SUBJECT, title);
-                        i.putExtra(Intent.EXTRA_TEXT, body);
-                        startActivity(i);
-                        break;
-                    case 1:
-                        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                        sendIntent.putExtra("sms_body", body); 
-                        sendIntent.setType("vnd.android-dir/mms-sms");
-                        startActivity(sendIntent);   
-                        break;
-                    case 2:
-                        i.setType("text/plain");
-                        i.putExtra(Intent.EXTRA_TEXT, "http://www.openwatch.net");
-                        i.setClassName("com.facebook.katana" , "com.facebook.katana.ShareLinkActivity");
-                        startActivity(i); 
-                        break;
-                    case 3:
-                        i.putExtra(Intent.EXTRA_SUBJECT, title);
-                        i.putExtra(Intent.EXTRA_TEXT, body);
-                        i.setType("text/plain");
-                        i.setClassName("com.twitter.android" , "com.twitter.android.PostActivity");
-                        startActivity(i); 
-                        break;
-                    case 4:
-                        i.putExtra(Intent.EXTRA_SUBJECT, title);
-                        i.putExtra(Intent.EXTRA_TEXT, body);
-                        i.setType("text/plain");
-                        startActivity(Intent.createChooser(i, "Share how?")); 
-                        break;
-                        
-                        
-                }
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
+        i.putExtra(Intent.EXTRA_SUBJECT, title);
+        i.putExtra(Intent.EXTRA_TEXT, body);
+        i.setType("text/plain");
+        startActivity(Intent.createChooser(i, "Share how?")); 
     }
     
        
