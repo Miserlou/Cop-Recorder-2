@@ -1,5 +1,13 @@
 package org.ale.coprecord;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.ale.coprecord.rService;
 import org.ale.coprecord.R;
 import org.ale.coprecord.recordService;
@@ -8,6 +16,7 @@ import org.openintents.filemanager.FileManagerActivity;
 
 import android.app.ActivityGroup;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,12 +24,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,10 +42,16 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivityGroup extends ActivityGroup {
     /** Called when the activity is first created. */
@@ -82,7 +102,7 @@ public class MainActivityGroup extends ActivityGroup {
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         
-        MenuItem mi = menu.add(0,0,0,R.string.open);
+        MenuItem mi = menu.add(0,0,0,R.string.menu_open);
         mi.setIcon(android.R.drawable.ic_menu_add);
         MenuItem mi3 = menu.add(0,2,0,R.string.tutorial);
         mi3.setIcon(android.R.drawable.ic_menu_help);
@@ -98,8 +118,77 @@ public class MainActivityGroup extends ActivityGroup {
 
         switch (item.getItemId()) {
             case 0:
-                startActivity(new Intent(this, FileManagerActivity.class));
-                return(true);
+                AlertDialog ad;
+                final Dialog dialoog = new Dialog(this, R.style.CustomDialogTheme);
+                dialoog.setContentView(R.layout.dialog);
+                
+                final LayoutInflater factory = getLayoutInflater();
+                final View cView = factory.inflate(R.layout.dialog, null);
+                final ListView list = (ListView) cView.findViewById(R.id.list);
+                list.setVerticalScrollBarEnabled(true);
+                list.setStackFromBottom(true);
+                
+                ArrayList<String> listItems = getRecordingList();
+               
+                ListItemsAdapter adapter = new ListItemsAdapter(listItems);
+                list.setAdapter(adapter);
+                list.setOnItemClickListener(new OnItemClickListener() {
+
+                    public void onItemClick(AdapterView<?> arg0, View arg1,
+                            int arg2, long arg3) {
+                        TextView tv = (TextView)(arg1.findViewById(R.id.text));
+                        final String br = tv.getText().toString();
+                        
+                        final CharSequence[] items = {getString(R.string.upload), getString(R.string.play)};
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivityGroup.this);
+                        builder.setTitle(getString(R.string.upload_or_play));
+                        DialogInterface.OnClickListener DIO = new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int item) {
+                                switch(item) {
+                                case 0:
+                                try {
+                                    File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/rpath.txt");
+                                    f.delete();
+                                    f.createNewFile();
+                                    FileOutputStream fOut = new FileOutputStream(f);
+                                    OutputStreamWriter osw = new OutputStreamWriter(fOut); 
+                                    osw.write(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings/" + br);
+                                    osw.flush();
+                                    osw.close();
+                                    } catch (IOException e1) {
+                                         e1.printStackTrace();
+                                    }
+                                	 
+                                    Intent mainIntent = new Intent(getBaseContext(), DescribeActivity.class); 
+                                    startActivity(mainIntent);
+                                    finish();
+                         		  return;
+                                case 1:
+                                    Intent it;
+                                    Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings/" + br);
+                                    it = new Intent(Intent.ACTION_VIEW, uri);
+                                    it.setDataAndType(uri,"video/3gpp"); 
+                                    startActivity(it);
+                                    return;
+                                }
+                                
+                                
+                            }
+                            };
+                        builder.setItems(items, DIO);
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                        dialoog.cancel();
+                        
+                    }});
+                
+                dialoog.setContentView(cView);
+                dialoog.show();
+                list.setTranscriptMode(ListView.TRANSCRIPT_MODE_DISABLED);
+                list.scrollTo(0, 0);
+                list.setSelection(0);
+                
+                return true;
             case 1:
                 // About
                 new AlertDialog.Builder(this)
@@ -202,6 +291,51 @@ public class MainActivityGroup extends ActivityGroup {
         i.setType("text/plain");
         startActivity(Intent.createChooser(i, "Share how?")); 
     }
+    
+    public ArrayList<String> getRecordingList() {
+        File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String> al = new ArrayList<String>();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+          if (listOfFiles[i].isFile()) {
+            al.add(listOfFiles[i].getName());
+          }
+        }
+        
+        return al;
+    }
+
+class ListItemsAdapter extends ArrayAdapter<String> {
+    
+    List<String> listItems;
+    
+    public ListItemsAdapter(List<String> items) {
+        super(MainActivityGroup.this, android.R.layout.simple_list_item_1, items);
+        listItems = items;
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+
+        LayoutInflater inflater = getLayoutInflater();
+        convertView = inflater.inflate(R.layout.dialog_items, null);
+
+        holder = new ViewHolder();
+        holder.text = (TextView) convertView.findViewById(R.id.text);
+        convertView.setTag(holder);
+
+        // Bind the data efficiently with the holder.
+        holder.text.setText( listItems.get(position) );
+        return convertView;
+    }
+
+    private class ViewHolder {
+        TextView text;
+    }
+    
+    
+}
     
        
 }

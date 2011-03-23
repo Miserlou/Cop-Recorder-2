@@ -25,6 +25,8 @@
     <string name="upload_done">Upload finished!</string>
     <string name="open">Select File to Upload</string>
     <string name="tutorial">Tutorial</string>
+    <string name="upload_or_play">Upload or Play?</string>
+    <string name="play">Play</string>
     <string name="about_text">Cop Recorder 2 is a subproject of OpenWatch. OpenWatch is a participatory citizen media project aiming to provide documentary evidence of uses and abuses of power.\n\n
 
 				Until now, surveillance technology has only been in the hands of those who are already in power, which means it cannot be used to combat the largest problem facing modern society: abuse of power.\n\n
