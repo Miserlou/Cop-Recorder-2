@@ -12,7 +12,6 @@ import org.ale.coprecord.rService;
 import org.ale.coprecord.R;
 import org.ale.coprecord.recordService;
 import org.ale.coprecord.uploadService;
-import org.openintents.filemanager.FileManagerActivity;
 
 import android.app.ActivityGroup;
 import android.app.AlertDialog;
