@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/tile"
+    android:background="@drawable/grad_bg"
     >
 <ImageView
    		android:id="@+id/stripey"
@@ -39,5 +39,4 @@
     			android:singleLine="true"
     			android:ellipsize="none"
     			android:padding="20dip" />
-    			
 </LinearLayout>
