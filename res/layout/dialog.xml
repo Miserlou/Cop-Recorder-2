@@ -11,7 +11,7 @@
 		android:textStyle="bold" 
 		android:textColor="#ffffffff"
 		android:textSize="32dip"
-		android:text="@string/open" 
+		android:text="@string/menu_open" 
 		android:gravity="center"
 		android:layout_gravity="center_vertical" />	    
 	

@@ -5,6 +5,12 @@
     android:layout_height="fill_parent"
     android:background="#ffffff"
     >
+    
+ <ImageView
+   		android:id="@+id/stripey"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:src="@drawable/stripey" />
 
 <ScrollView
     android:orientation="vertical"
@@ -32,7 +38,7 @@
 		    android:layout_height="wrap_content"
 		    android:textAppearance="?android:attr/textAppearanceLarge"
 		    android:text="@string/please_describe"
-		    android:textColor="#EB1D1D"
+		    android:textColor="#0000ff"
 		    
 	    	/>
 		
